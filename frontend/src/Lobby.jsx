@@ -8,6 +8,7 @@ export default function Lobby() {
         <Link className="card" to="/xo"><span className="font-semibold">Tic-Tac-Toe (XO)</span> — Multiplayer & Bot</Link>
         <Link className="card" to="/fruitcut"><span className="font-semibold">Fruit Cut</span> — Slice fruits, score up!</Link>
         <Link className="card" to="/dino"><span className="font-semibold">Dino Run</span> — Jump to survive</Link>
+        <Link className="card" to="/snakegame"><span className="font-semibold">Snake Game</span> — Eat the apple</Link>
       </div>
     </div>
   );

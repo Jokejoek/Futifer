@@ -3,6 +3,7 @@ import Lobby from './Lobby';
 import XO from './games/XO';
 import FruitCut from './games/FruitCut';
 import Dino from './games/Dino';
+import SnakeGame from './games/SnakeGame';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Link to="/xo">XO</Link>
           <Link to="/fruitcut">Fruit Cut</Link>
           <Link to="/dino">Dino</Link>
+          <Link to="/snakegame">Snake Game</Link>
         </nav>
       </header>
       <main className="p-4">
@@ -21,6 +23,7 @@ export default function App() {
           <Route path="/xo" element={<XO />} />
           <Route path="/fruitcut" element={<FruitCut />} />
           <Route path="/dino" element={<Dino />} />
+          <Route path="/snakegame" element={<SnakeGame />} />
         </Routes>
       </main>
     </BrowserRouter>
