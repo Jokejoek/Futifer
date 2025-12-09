@@ -6,7 +6,7 @@ export default function Snake() {
   const [finalScore, setFinalScore] = useState(0);
   const scoreRef = useRef(0);
   const requestRef = useRef();
-  const canChangeDirection = useRef(true); // ✅ ใช้ ref เพื่อควบคุมการเปลี่ยนทิศทาง
+  const canChangeDirection = useRef(true);
 
   useEffect(() => {
     if (gameState !== 'PLAYING') return;
@@ -20,21 +20,37 @@ export default function Snake() {
 
     let snake = [{ x: 10, y: 10 }];
     let direction = { x: 1, y: 0 };
-    let food = {
-      x: Math.floor(Math.random() * tileCount),
-      y: Math.floor(Math.random() * tileCount),
-    };
+    let food = generateFood();
     let lastTime = performance.now();
     let moveTimer = 0;
     const moveInterval = 100;
 
+    function generateFood() {
+      let newFood;
+      let isOnSnake;
+
+      do {
+        isOnSnake = false;
+        newFood = {
+          x: Math.floor(Math.random() * tileCount),
+          y: Math.floor(Math.random() * tileCount),
+        };
+
+        for (let segment of snake) {
+          if (segment.x === newFood.x && segment.y === newFood.y) {
+            isOnSnake = true;
+            break;
+          }
+        }
+      } while (isOnSnake);
+
+      return newFood;
+    }
+
     const resetGame = () => {
       snake = [{ x: 10, y: 10 }];
       direction = { x: 1, y: 0 };
-      food = {
-        x: Math.floor(Math.random() * tileCount),
-        y: Math.floor(Math.random() * tileCount),
-      };
+      food = generateFood();
       scoreRef.current = 0;
     };
 
@@ -78,7 +94,6 @@ export default function Snake() {
       const delta = time - lastTime;
       moveTimer += delta;
       lastTime = time;
-      
 
       if (moveTimer > moveInterval) {
         moveTimer = 0;
@@ -110,15 +125,12 @@ export default function Snake() {
         // Eat food
         if (head.x === food.x && head.y === food.y) {
           scoreRef.current += 1;
-          food = {
-            x: Math.floor(Math.random() * tileCount),
-            y: Math.floor(Math.random() * tileCount),
-          };
+          food = generateFood();
         } else {
           snake.pop();
         }
 
-        canChangeDirection.current = true; // ✅ อนุญาตให้เปลี่ยนทิศทางรอบถัดไป
+        canChangeDirection.current = true;
       }
 
       // Draw
