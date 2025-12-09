@@ -16,7 +16,7 @@ app.use((req, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
-// In-memory room state
+/*// In-memory room state
 const rooms = {}; // roomId: { players: [socketId], board, turn, started }
 
 io.on("connection", (socket) => {
@@ -140,6 +140,7 @@ io.on("connection", (socket) => {
   });
 });
 
+
 function checkWinner(b) {
   const lines = [
     [0, 1, 2],
@@ -156,6 +157,10 @@ function checkWinner(b) {
   }
   return null;
 }
+*/
+
+
+
 
 const PORT = 4000;
 server.listen(PORT, "0.0.0.0", () => {
